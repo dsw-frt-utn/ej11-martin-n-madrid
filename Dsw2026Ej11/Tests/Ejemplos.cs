@@ -7,6 +7,10 @@ namespace Dsw2026Ej11.Tests;
 
 internal class Ejemplos
 {
+    private static Alumno alumno1 = new Alumno(11, "Juan", 8.5);
+    private static Alumno alumno2 = new Alumno(12, "Maria", 7.3);
+    private static Alumno alumno3 = new Alumno(13, "Celeste", 7.9);
+
     //Agregar 3 alumnos a la lista
     //Listar por consola los alumnos
     //Buscar por nombre un alumno que exista y mostrar por consola
@@ -15,7 +19,25 @@ internal class Ejemplos
     //Eliminar el primer elemento de la lista y listar por consola los alumnos
     public static void EjemploList()
     {
+        var listado = new CasoList();
 
+        listado.agregarAlumnos(alumno1);
+        listado.agregarAlumnos(alumno2);
+        listado.agregarAlumnos(alumno3);
+
+        buscarAlumnosListado(listado.ListarAlumnos);
+
+        var alumnoABuscar1 = listado.buscarAlumno("Celeste");
+        mostrarAlumnoEncontrado(alumnoABuscar1);
+        var alumnoABuscar2 = listado.buscarAlumno("Martin");
+        mostrarAlumnoEncontrado(alumnoABuscar2);
+        
+        listado.eliminarAlumno(alumno2);
+
+        buscarAlumnosListado(listado.ListarAlumnos);
+
+        listado.eliminarAlumnoPosicion(0);
+        buscarAlumnosListado(listado.ListarAlumnos);
     }
 
     //Agregar 3 alumnos al diccionario
@@ -26,9 +48,9 @@ internal class Ejemplos
     public static void EjemploDictionary()
     {
         var diccionario = new CasoDictionary();
-        diccionario.AgregarAlumno(1000, new Alumno(11, "Juan", 8.5));
-        diccionario.AgregarAlumno(2000, new Alumno(12, "Maria", 7.3));
-        diccionario.AgregarAlumno(2500, new Alumno(13, "Celeste", 7.9));
+        diccionario.AgregarAlumno(1000, alumno1);
+        diccionario.AgregarAlumno(2000, alumno2);
+        diccionario.AgregarAlumno(2500, alumno3);
 
         buscarAlumnosDiccionario(diccionario.Alumnos);
 
@@ -46,6 +68,24 @@ internal class Ejemplos
 
     }
 
+    public static void buscarAlumnosListado(List<Alumno> alumnos)
+    {
+        foreach (var alumno in alumnos)
+        {
+            Console.WriteLine($"Nombre: {alumno.Nombre}, Promedio: {alumno.Promedio}");
+        }
+    }
+    public static void mostrarAlumnoEncontrado(Alumno alumnoEncontrado)
+    {
+        if (alumnoEncontrado != null)
+        {
+            Console.WriteLine(alumnoEncontrado);
+        }
+        else
+        {
+            Console.WriteLine("No existe");
+        }
+    }
     public static void buscarAlumnosDiccionario(Dictionary<int, Alumno> alumnos)
     {
         foreach (KeyValuePair<int, Alumno> elemento in alumnos)
@@ -56,4 +96,5 @@ internal class Ejemplos
             Console.WriteLine($"Legajo: {legajo}, Nombre: {alumnoActual.Nombre}, Promedio: {alumnoActual.Promedio}");
         }
     }
+
 }
