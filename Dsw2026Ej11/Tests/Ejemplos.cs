@@ -62,10 +62,49 @@ internal class Ejemplos
         buscarAlumnosDiccionario(diccionario.Alumnos);
     }
 
-    //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
+    //Realizar una llamada a cada método definido en CasoLinq y mostrar por consola según corresponda
     public static void EjemploLinq()
     {
+        CasoLinq listadoLibros = new CasoLinq();
 
+        Libro primerLibro = listadoLibros.GetPrimero();
+        Console.WriteLine($"Primer libro: {primerLibro.Titulo}");
+
+        Libro ultimoLibro = listadoLibros.GetUltimo();
+        Console.WriteLine($"Último libro: {ultimoLibro.Titulo}");
+        Console.WriteLine($"Total de precios: {listadoLibros.GetTotalPrecios():C}");
+        Console.WriteLine($"4. Promedio de los precios: {listadoLibros.GetPromedioPrecios():C}");
+
+
+        Console.WriteLine("Libros con Id mayor a 15:");
+        foreach (Libro libro in listadoLibros.GetListById())
+        {
+            Console.WriteLine($"   - [ID: {libro.Id}] {libro.Titulo}");
+        }
+
+        Console.WriteLine("Lista:");
+        foreach (string cadena in listadoLibros.GetLibros())
+        {
+            Console.WriteLine($"   - {cadena}");
+        }
+
+        Libro mayorPrecio = listadoLibros.GetMayorPrecio();
+        Console.WriteLine($"Libro más caro: {mayorPrecio.Titulo} ({mayorPrecio.Precio:C})");
+
+        Libro menorPrecio = listadoLibros.GetMenorPrecio();
+        Console.WriteLine($"Libro más barato: {menorPrecio.Titulo} ({menorPrecio.Precio:C})");
+
+        Console.WriteLine("Libros con precio mayor al promedio:");
+        foreach (Libro libro in listadoLibros.GetMayorPromedio())
+        {
+            Console.WriteLine($"   - {libro.Titulo} ({libro.Precio:C})");
+        }
+
+        Console.WriteLine("Libros ordenados:");
+        foreach (Libro libro in listadoLibros.GetLibrosOrdenados())
+        {
+            Console.WriteLine($"   - {libro.Titulo}");
+        }
     }
 
     public static void buscarAlumnosListado(List<Alumno> alumnos)
